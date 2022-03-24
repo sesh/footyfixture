@@ -1,0 +1,30 @@
+name: Build Foot Calendar
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create the build directory
+        run: mkdir _build
+
+      - name: Get the latest fixture
+        run: python3 get_fixture.py
+
+      - name: Generate the calendar html file
+        run: python3 gen_html.py
+
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_build
