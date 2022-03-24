@@ -62,7 +62,7 @@ template = template.replace("<body>", """
             font-family: 'IBM Plex Mono', monospace;
         }
 
-        h2 {
+        h1, h2 {
             font-size: 1.1em;
         }
 
@@ -71,7 +71,7 @@ template = template.replace("<body>", """
             padding: 0;
         }
 
-        section {
+        header, section {
             margin: 0 12px 2em;
             width: 440px;
         }
@@ -94,7 +94,7 @@ template = template.replace("<body>", """
             font-weight: 700;
         }
     </style>
-<body>""")
+<body><header><h1>footyfixture.txt</h1></header>""")
 template += html
 template += "</body></html>"
 
