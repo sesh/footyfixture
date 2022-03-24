@@ -51,7 +51,9 @@ html += "</ul></section>"
 
 template = request("https://basehtml.xyz").content.decode().split("<!-- Delete this part -->")[0]
 template = template.replace("<title>Minimal base.html</title>", "<title>Footy Calendar - 2022 Edition</title>")
-template = template.replace("<body>", """    <link rel="preconnect" href="https://fonts.googleapis.com">
+template = template.replace("width=device-width", "width=464px")
+template = template.replace("<body>", """
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700" rel="stylesheet"> 
 
@@ -70,7 +72,7 @@ template = template.replace("<body>", """    <link rel="preconnect" href="https:
         }
 
         section {
-            margin-bottom: 2em;
+            margin: 0 12px 2em;
             width: 440px;
         }
         
