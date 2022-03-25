@@ -71,7 +71,7 @@ template = template.replace("<body>", """
             padding: 0;
         }
 
-        header, section {
+        header, section, footer {
             margin: 0 12px 2em;
             width: 440px;
         }
@@ -96,6 +96,7 @@ template = template.replace("<body>", """
     </style>
 <body><header><h1>footyfixture.txt</h1></header>""")
 template += html
+template += '<footer><3 from Albury. Created by Brenton C. <a href="https://github.com/sesh/footyfixture">sesh/footyfixture</a>'
 template += "</body></html>"
 
 with open("_build/index.html", "w") as f:
