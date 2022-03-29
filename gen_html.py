@@ -6,7 +6,6 @@ from zoneinfo import ZoneInfo
 
 
 matches = json.loads(open("matches.json").read())
-print(json.dumps(matches[0], indent=2))
 
 html = ""
 roundNumber = 0
@@ -23,14 +22,17 @@ for m in matches:
     home = m["home"]["team"]["abbreviation"]
     away = m["away"]["team"]["abbreviation"]
     venue = m["venue"]["abbreviation"]
-    start_time_utc = datetime.fromisoformat(m["utcStartTime"].replace("+0000", "+00:00"))
+    start_time_utc = datetime.fromisoformat(
+        m["utcStartTime"].replace("+0000", "+00:00")
+    )
     start_time_local = start_time_utc.astimezone(tz=ZoneInfo(m["venue"]["timezone"]))
 
-    if m["home"].get("score"):
+    if m["status"] == "CONCLUDED":
         home_score = m["home"]["score"]["totalScore"]
         away_score = m["away"]["score"]["totalScore"]
         home_win = home_score > away_score
-        if home_score == away_score: home_win = None  # draw
+        if home_score == away_score:
+            home_win = None  # draw
     else:
         home_score, away_score, home_win = None, None, None
 
@@ -43,16 +45,29 @@ for m in matches:
     else:
         html += '<span class="vs">vs</span>'
 
-    html += f'<span class="away{" win" if home_win == False else ""}">{away}</span></span>'
+    html += (
+        f'<span class="away{" win" if home_win == False else ""}">{away}</span></span>'
+    )
     html += f'<span class="venue">{venue}</span>'
     html += "</li>"
 
+now = datetime.utcnow()
+now_melbourne = now.astimezone(tz=ZoneInfo("Australia/Melbourne"))
+
 html += "</ul></section>"
 
-template = request("https://basehtml.xyz").content.decode().split("<!-- Delete this part -->")[0]
-template = template.replace("<title>Minimal base.html</title>", "<title>Footy Calendar - 2022 Edition</title>")
+template = (
+    request("https://basehtml.xyz")
+    .content.decode()
+    .split("<!-- Delete this part -->")[0]
+)
+template = template.replace(
+    "<title>Minimal base.html</title>", "<title>Footy Calendar - 2022 Edition</title>"
+)
 template = template.replace("width=device-width", "width=464px")
-template = template.replace("<body>", """
+template = template.replace(
+    "<body>",
+    """
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700" rel="stylesheet"> 
@@ -94,7 +109,9 @@ template = template.replace("<body>", """
             font-weight: 700;
         }
     </style>
-<body><header><h1>footyfixture.txt</h1></header>""")
+<body><header><h1>footyfixture.txt</h1></header>""",
+)
+
 template += html
 template += '<footer><3 from Albury. Created by Brenton C. <a href="https://github.com/sesh/footyfixture">sesh/footyfixture</a>'
 template += "</body></html>"
