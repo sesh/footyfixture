@@ -26,6 +26,9 @@ jobs:
 
       - name: Generate the calendar html file
         run: python3 gen_html.py
+      
+      - name: Copy the favicon
+        run: cp favicon-16x16.png ./_build/
 
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3

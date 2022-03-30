@@ -68,13 +68,10 @@ template = template.replace("width=device-width", "width=464px")
 template = template.replace(
     "<body>",
     """
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700" rel="stylesheet"> 
-
+    <link rel="icon" type="image/png" href="favicon-16x16.png">
     <style>
         body {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
         }
 
         h1, h2 {
