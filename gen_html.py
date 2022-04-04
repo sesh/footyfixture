@@ -62,9 +62,8 @@ template = (
     .split("<!-- Delete this part -->")[0]
 )
 template = template.replace(
-    "<title>Minimal base.html</title>", "<title>Footy Calendar - 2022 Edition</title>"
+    "<title>Minimal base.html</title>", "<title>Footy Fixture - 2022 Edition</title>"
 )
-template = template.replace("width=device-width", "width=464px")
 template = template.replace(
     "<body>",
     """
