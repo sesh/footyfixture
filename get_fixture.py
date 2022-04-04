@@ -1,5 +1,6 @@
 import time
 import json
+import sys
 from thttp import request
 
 headers = {
@@ -17,7 +18,13 @@ for r in range(1, 24):
     response = request(
         f"https://aflapi.afl.com.au/afl/v2/matches?competitionId=1&compSeasonId=43&pageSize=50&roundNumber={r}"
     )
-    matches.extend(response.json["matches"])
+
+    try:
+        matches.extend(response.json["matches"])
+    except:
+        print(response)
+        sys.exit(1)
+
     print(f"{len(matches)} matches retrieved so far")
     time.sleep(5)
 
