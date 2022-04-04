@@ -19,7 +19,7 @@ for r in range(1, 24):
     )
     matches.extend(response.json["matches"])
     print(f"{len(matches)} matches retrieved so far")
-    time.sleep(1)
+    time.sleep(5)
 
 with open("matches.json", "w") as f:
     f.write(json.dumps(matches))
