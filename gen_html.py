@@ -64,6 +64,10 @@ template = (
 template = template.replace(
     "<title>Minimal base.html</title>", "<title>Footy Fixture - 2022 Edition</title>"
 )
+
+template = template.replace("width=device-width", "width=440")
+template = template.replace("initial-scale=1.0", "maximum-scale=1.2")
+
 template = template.replace(
     "<body>",
     """
