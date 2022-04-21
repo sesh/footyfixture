@@ -4,6 +4,8 @@ from thttp import request
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+from ladder import get_ladder
+
 
 matches = json.loads(open("matches.json").read())
 
@@ -81,7 +83,7 @@ template = template.replace(
             font-size: 1.1em;
         }
 
-        ul {
+        ul, ol {
             list-style: none;
             padding: 0;
         }
@@ -108,10 +110,31 @@ template = template.replace(
         .win {
             font-weight: 700;
         }
+
+        ol li span {
+            display: inline-block;
+        }
+
+        ol li .team {
+            width: 8em;
+        }
+
+        ol li .wins, ol li .losses, ol li .draws {
+            width: 2em;
+        }
+
+        ol li .percentage {
+            width: 8em;
+        }
+
+        ol li:nth-child(1), ol li:nth-child(9) {
+            border-bottom: 1px solid black;
+        }
     </style>
 <body><header><h1>footyfixture.txt</h1></header>""",
 )
 
+template += get_ladder()
 template += html
 template += '<footer><3 from Albury. Created by Brenton C. <a href="https://github.com/sesh/footyfixture">sesh/footyfixture</a>'
 template += "</body></html>"
