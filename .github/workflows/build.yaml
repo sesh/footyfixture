@@ -1,4 +1,4 @@
-name: Build Foot Calendar
+name: Build Footy Calendar
 
 on:
   push:
